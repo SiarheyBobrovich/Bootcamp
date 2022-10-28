@@ -1,0 +1,6 @@
+FROM mysql:8.0.31
+MAINTAINER root
+
+ADD /user/ddl.sql /docker-entrypoint-initdb.d
+
+EXPOSE 3306

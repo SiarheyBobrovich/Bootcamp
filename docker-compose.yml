@@ -1,0 +1,22 @@
+version: '3.5'
+services:
+  mysql:
+    build: mysql
+    image: bootcamp_mysql:1.0.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: users
+      MYSQL_ROOT_PASSWORD: 172143
+    networks:
+      - afisha_ntwrk
+  user-service:
+      build: user-service
+      image: bootcamp_user-service:1.0.0
+      restart: always
+      ports:
+        - "80:80"
+      networks:
+        - afisha_ntwrk
+networks:
+    afisha_ntwrk:
+      name: afisha_ntwrk
