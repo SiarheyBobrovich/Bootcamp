@@ -1,0 +1,197 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: IT-Academy Bootcamp
+  contact:
+    name: IT-Academy
+
+servers:
+  - url: http://{host}:{port}
+    description: custom server
+    variables:
+      host:
+        description: host name
+        default: localhost
+      port:
+        description: port value
+        default: "80"
+
+tags:
+  - name: "User"
+    description: "User service"
+paths:
+  /api/v1/user:
+    post:
+      tags:
+        - "User"
+      summary: Add a new user
+      requestBody:
+        $ref: "#/components/requestBodies/User"
+      responses:
+        '201':
+          description: User added successful
+        '400':
+          $ref: '#/components/responses/Bad_Request'
+        '500':
+          $ref: '#/components/responses/Internal_Server_Error'
+    get:
+      tags:
+        - "User"
+      summary: Get page of users
+      parameters:
+      - in: query
+        name: page
+        description: "page of user"
+        required: false
+        schema:
+          type: integer
+          format: int32
+          example: 1
+      - in: query
+        name: size
+        description: "size of page"
+        required: false
+        schema:
+          type: integer
+          format: int32
+          example: 20
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/Bad_Request'
+        '500':
+          $ref: '#/components/responses/Internal_Server_Error'
+  
+components:
+  requestBodies:
+    User:
+      description: user body
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+           
+  responses:
+    Bad_Request:
+      description: The server cannot or will not process the request due to an apparent client error
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - type: array
+                items:
+                  $ref: '#/components/schemas/t_single_error_response'
+              - $ref: '#/components/schemas/t_multiple_error_response'
+          examples:
+            t_single_error_response:
+              value:
+                - logref: error
+                  message:  The bad request. Change the request and send it again
+            t_multiple_error_response:
+              value:
+                logref: structured_error
+                errors:
+                  - field: model
+                    message: must be not empty
+    Internal_Server_Error:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/t_single_error_response'
+          example:
+            - logref: error
+              message:  Internal Server Error. The server was unable to process the request correctly
+  schemas:
+    t_single_error_response:
+      type: object
+      description: Error. contains a description
+      required:
+        - logref
+        - message
+      properties:
+        logref:
+          type: string
+          description: error type
+          example: error
+        message:
+          description: error message
+          type: string
+          example: The request contains invalid data. Change the request and send it again
+
+    t_multiple_error_response:
+      type: object
+      description: Error. Contains error descriptions with links to entity fields
+      required:
+        - logref
+        - errors
+      properties:
+        logref:
+          type: string
+          description: error type
+        errors:
+          description: field name
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: error message
+                example: must not be empty
+              field:
+                type: string
+                description: field name
+                example: model
+    User:
+      type: object
+      description: "User"
+      required:
+        - name
+        - surname
+        - patronymic
+        - email
+        - role
+      properties:
+        name:
+          type: string
+          description: "user's name"
+          example: "Ivan"
+          format: "[aA-zZ]{0, 40}"
+        surname:
+          type: string
+          description: "user's surname"
+          example: "Ivanov"
+          format: "[aA-zZ]{0, 20}"
+        patronymic:
+           type: string
+           description: "user's patronymic"
+           example: "Ivanovich"
+           format: "[aA-zZ]{0, 40}"
+        email:
+          type: string
+          description: "user's email"
+          format: "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"
+          example: 
+            - username@domain.com
+            - user.name@domain.com
+            - user-name@domain.com
+            - username@domain.co.in
+            - user_name@domain.com
+        role:
+          $ref: '#/components/schemas/Role'
+    Role:
+      type: string
+      description: |
+        User roles 
+        - roles:
+          * `Administrator`
+          * `Sale User` 
+          * `Customer User`
+          * `Secure API User`"
+      example: "Administrator"
+      
