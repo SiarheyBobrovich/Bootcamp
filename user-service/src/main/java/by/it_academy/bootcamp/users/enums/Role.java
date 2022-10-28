@@ -1,8 +1,10 @@
 package by.it_academy.bootcamp.users.enums;
 
 public enum Role {
+
     ADMINISTRATOR("Administrator"),
     SALE_USER("Sale User"),
+
     CUSTOMER_USER("Customer User"),
     SECURE_API_USER("Secure API User");
 

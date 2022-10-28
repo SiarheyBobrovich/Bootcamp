@@ -3,8 +3,8 @@ package by.it_academy.bootcamp.users.dto.request;
 import by.it_academy.bootcamp.users.enums.Role;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.*;
@@ -12,7 +12,6 @@ import javax.validation.constraints.*;
 /**
  * User
  */
-@ApiModel
 @Validated
 @JsonDeserialize(builder = UserRequestDto.Builder.class)
 public class UserRequestDto {
@@ -20,7 +19,7 @@ public class UserRequestDto {
     private final String name;
     @ApiModelProperty(example = "Ivanov", required = true)
     private final String surname;
-    @ApiModelProperty(example = "Ivanovich", required = true)
+    @ApiModelProperty(example = "Ivanovich")
     private final String patronymic;
     @ApiModelProperty(example =
             "username@domain.com, " +
@@ -31,7 +30,18 @@ public class UserRequestDto {
             required = true)
     private final String email;
 
-    @ApiModelProperty(required = true, reference = "by.it_academy.bootcamp.users.enums.Role")
+//    @ApiModelProperty(required = true, dataType = "string", example =
+//            "Administrator, " +
+//            "Sale User, " +
+//            "Customer User, " +
+//            "Secure API User"
+//    )
+    @Schema(required = true, type = "string", allowableValues = {
+            "Administrator",
+            "Sale User",
+            "Customer User",
+            "Secure API User"
+    })
     private final Role role;
 
     public UserRequestDto(String name,
