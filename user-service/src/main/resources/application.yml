@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: @profileActive@
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+springfox:
+  documentation:
+    open-api:
+      v3.path: /api-docs
+
+server:
+  port: 80
