@@ -1,0 +1,22 @@
+email;name;surname;patronymic;role
+;ivan;ivanov;Ivanovich;Administrator
+siarhey@mail.ru;;siarheevich;siarheev;SaleUser
+alex@mail.ru;Alex;;Alexov;CustomerUser
+mail.ru;ivan;ivanov;Ivanovich;Administrator
+ivan@.ru;ivan;ivanov;Ivanovich;Administrator
+ivan@mail.;ivan;ivanov;Ivanovich;Administrator
+ivan@mail;ivan;ivanov;Ivanovich;Administrator
+ivanmail.ru;ivan;ivanov;Ivanovich;Administrator
+ivanru;ivan;ivanov;Ivanovich;Administrator
+ivan@mail.ru;Иван;ivanov;Ivanovich;Administrator
+ivan@mail.ru;ivan;Иванов;Ivanovich;Administrator
+ivan@mail.ru;ivan;ivanov;Иванович;Administrator
+ivan@mail.ru;ivan;ivanov;Ivanovich;Администратор
+ivan@mail.ru; ;ivanov;Ivanovich;Administrator
+ivan@mail.ru;ivan; ;Ivanovich;Administrator
+ivan@mail.ru;ivan;ivanov; ;Administrator
+ivan@mail.ru;ivan;ivanov;Ivanovich;
+ivan@mail.ru;ddawdawdqwefsefeqqweq;ivanov;Ivanovich;Administrator
+ivan@mail.ru;ivan;ddawdawdqwefsefeqqweqddawdawdqwefsefeqqwe;Ivanovich;Administrator
+ivan@mail.ru;ivan;ivanov;ddawdawdqwefsefeqqweqddawdawdqwefsefeqqwe;Administrator
+ddawdawdqwefsefeqqweqddawdawdqwefsefeqqweqdfnvd@mail.ru;ivan;ivanov;Ivanovich;Administrator

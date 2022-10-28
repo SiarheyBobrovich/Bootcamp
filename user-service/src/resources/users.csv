@@ -1,0 +1,6 @@
+email;name;surname;patronymic;role
+ivan@mail.ru;ivan;ivanov;Ivanovich;Administrator
+siarhey@mail.ru;sirhey;siarheevich;siarheev;Sale User
+alex@mail.ru;Alex;Alexovich;Alexov;Customer User
+ilia@mail.ru;Ilia;Ilianovich;Iliin;Secure API User
+Dasha@daria.com;Daria;Darieva;Darievna;Administrator
