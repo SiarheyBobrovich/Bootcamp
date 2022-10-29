@@ -20,36 +20,39 @@ public class GlobalHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handle(IllegalArgumentException e) {
-        TSingleErrorResponse tSingleErrorResponse = new TSingleErrorResponse();
-        tSingleErrorResponse.message(e.getMessage());
+    public TSingleErrorResponse handle(IllegalArgumentException e) {
         log.info(e.getMessage());
-        return e.getMessage();
+        return new TSingleErrorResponse()
+                .message(e.getMessage())
+                .logref("error");
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public TSingleErrorResponse handle(RuntimeException exception) {
         log.error(exception.getMessage());
-        return new TSingleErrorResponse().logref("error")
+        return new TSingleErrorResponse()
+                .logref("error")
                 .message("Internal Server Error. The server was unable to process the request correctly");
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public TSingleErrorResponse handle(HttpMessageNotReadableException exception) {
-        log.error(exception.getMessage());
+        log.info(exception.getMessage());
         String message = exception.getMessage();
+
         TSingleErrorResponse error = new TSingleErrorResponse()
                 .logref("error");
 
         if (!Objects.isNull(message)) {
             error.message(message.split(";")[0]);
+        }else {
+            error.message("Something went wrong");
         }
 
         return error;
     }
-
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
