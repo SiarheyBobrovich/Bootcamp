@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public Long save(UserRequestDto user) {
         if (Objects.isNull(user) || userDao.existsByEmail(user.getEmail())) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("User already exists");
         }
 
         User convert = conversionService.convert(user, User.class);
