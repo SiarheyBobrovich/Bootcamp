@@ -3,6 +3,7 @@ package by.it_academy.bootcamp.users.dao.entity;
 import by.it_academy.bootcamp.users.enums.Role;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(schema = "bootcamp", name = "users")
@@ -69,5 +70,30 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(patronymic, user.patronymic) && Objects.equals(email, user.email) && role == user.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, patronymic, email, role);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                '}';
     }
 }

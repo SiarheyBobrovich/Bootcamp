@@ -30,12 +30,6 @@ public class UserRequestDto {
             required = true)
     private final String email;
 
-//    @ApiModelProperty(required = true, dataType = "string", example =
-//            "Administrator, " +
-//            "Sale User, " +
-//            "Customer User, " +
-//            "Secure API User"
-//    )
     @Schema(required = true, type = "string", allowableValues = {
             "Administrator",
             "Sale User",
